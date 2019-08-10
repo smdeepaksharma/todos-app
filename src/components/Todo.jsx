@@ -5,13 +5,13 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
-import CommentIcon from '@material-ui/icons/Comment';
+import Close from '@material-ui/icons/Close';
  
-const Todo = ({ todo, handleToggle }) => {
+const Todo = ({ todo, handleToggle, removeTodo}) => {
 
     const { id, title, isCompleted } = todo
 
-    return <ListItem key={id} role={undefined} dense button onClick={handleToggle(id)}>
+    return <ListItem key={id} role={undefined} dense button onClick={() => handleToggle(id)}>
         <ListItemIcon>
             <Checkbox
                 edge="start"
@@ -21,10 +21,10 @@ const Todo = ({ todo, handleToggle }) => {
                 inputProps={{ 'aria-labelledby': title }}
             />
         </ListItemIcon>
-        <ListItemText id={id} primary={title} />
+        <ListItemText id={id} primary={title} style={{ textDecoration: isCompleted ? 'line-through':'none'}}/>
         <ListItemSecondaryAction>
             <IconButton edge="end" aria-label="comments">
-                <CommentIcon />
+                <Close onClick={() => removeTodo(id)}/>
             </IconButton>
         </ListItemSecondaryAction>
     </ListItem>
